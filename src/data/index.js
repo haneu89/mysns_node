@@ -13,7 +13,7 @@ exports.connection = mysql.createPool(
   }
 );
 
-exports.query = (queryString, params) => {
+exports.pool = (queryString, params) => {
   return new Promise((resolve, reject) => {
     this.connection.query(queryString, params, (err, rows, fields) => {
       (err) ? reject(err) : resolve(rows);
