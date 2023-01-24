@@ -20,8 +20,10 @@ exports.store = async (ctx, next) => {
 /** 피드 상세보기 */
 exports.show = async (ctx, next) => {
   let id = ctx.params.id;
+  let user = ctx.request.user;
 
   let item = await query.show(id);
+  item['is_me'] = (user.id === id.user_id);
 
   ctx.body = item;
 }
