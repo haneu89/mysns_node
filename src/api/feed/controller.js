@@ -23,7 +23,7 @@ exports.show = async (ctx, next) => {
   let user = ctx.request.user;
 
   let item = await query.show(id);
-  item['is_me'] = (user.id === id.user_id);
+  item['is_me'] = (user.id === item.user_id);
 
   ctx.body = item;
 }
