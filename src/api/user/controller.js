@@ -33,9 +33,9 @@ exports.register = async (ctx, next) => {
 
   if(affectedRows > 0) {
     let token = await generteToken({ name, id: insertId });
-    ctx.body = token;
+    ctx.body = {result: "success", token};
   } else {
-    ctx.body = {result: "fail"};
+    ctx.body = {result: "fail", message: '서버 오류'};
   }
 }
 /** 로그인 */
@@ -46,10 +46,10 @@ exports.login = async (ctx, next) => {
   let item = await query.login(email, result.toString('base64'));
 
   if(item == null) {
-    ctx.body = {result: "아이디 혹은 비밀번호가 맞지 않습니다."};
+    ctx.body = {result: "fail", message: "아이디 혹은 비밀번호가 맞지 않습니다."};
   } else {
     let token = await generteToken({name: item.name, id: item.id });
-    ctx.body = token;
+    ctx.body = {result: "success", token};
   }
 }
 /**
