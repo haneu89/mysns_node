@@ -3,7 +3,8 @@ const { pool } = require('../../data')
 exports.index = async () => {
   const query = `SELECT feed.*, u.name user_name, image_id FROM feed 
   LEFT JOIN user u on u.id = feed.user_id 
-  LEFT JOIN files f on feed.image_id = f.id`
+  LEFT JOIN files f on feed.image_id = f.id
+  ORDER BY feed.id DESC`
   return await pool(query);
 }
 exports.create = async (user, image, content) => {
